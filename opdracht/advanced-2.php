@@ -8,11 +8,23 @@
         "kleur" => "blauw"
     ];
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
+    function maakRij() {
+      $string;
+
+      foreach($informatie as $info => $antwoord) {
+        $string .= " <th><?={$info}?></th> ";
+      }
+
+      var_dump($string);
+      print_r($informatie);
+    };
+
+    maakRij();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $padding = htmlspecialchars($_POST['padding']);
       $border = htmlspecialchars($_POST['border']);
       $background = htmlspecialchars($_POST['background']);
-      echo $background;
 
       if(empty($padding)) {
         $padding = "auto";
@@ -26,8 +38,10 @@
         $background = "rgba(0, 0, 0, 0.555)";
       }
 
-      echo $border. " " . $padding . " " . $background;
-    };
+      //echo $border. " " . $padding . " " . $background;
+    }
+
+    
 ?>
 
 
@@ -72,9 +86,7 @@
     <table class="white-text">
         <thead>
           <tr>
-            <?php foreach($informatie as $info => $antwoord):?>
-              <th><?=$info?></th>
-            <?php endforeach;?>
+            <?php echo maakRij();?>
           </tr>
         </thead>
         <tbody>
