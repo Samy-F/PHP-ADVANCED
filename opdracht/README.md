@@ -68,3 +68,4 @@ d. padding (in pixels voor de tabelcel)
 > [W3 Schools - PHP Loops foreach](https://www.w3schools.com/php/php_looping_foreach.asp)
 > [W3 Schools - PHP Form handling](https://www.w3schools.com/php/php_forms.asp)
 > [W3 Schools - PHP Functions](https://www.w3schools.com/php/php_functions.asp)
+         
