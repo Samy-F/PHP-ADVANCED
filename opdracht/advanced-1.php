@@ -1,5 +1,5 @@
 <?php 
-  $kleuren = array("red", "blue", "green", "black", "brown");
+  $kleuren = array("red", "blue", "green", "black", "brown", "transparent");
 ?>
 
 <html lang="en">

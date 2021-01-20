@@ -1,5 +1,5 @@
 <?php 
-    $kleuren = array("red", "blue", "green", "black", "brown");
+    $kleuren = array("red", "blue", "green", "black", "brown", "transparent");
     $informatie = [
         "naam" => "Samy",
         "leeftijd" => "17",
@@ -8,22 +8,9 @@
         "kleur" => "blauw"
     ];
 
-    function maakRij() {
-      $string;
-
-      foreach($informatie as $info => $antwoord) {
-        $string .= " <th><?={$info}?></th> ";
-      }
-
-      var_dump($string);
-      print_r($informatie);
-    };
-
-    maakRij();
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
       $padding = htmlspecialchars($_POST['padding']);
-      $border = htmlspecialchars($_POST['border']);
+      $border = htmlspecialchars($_POST['border']) . "px";
       $background = htmlspecialchars($_POST['background']);
 
       if(empty($padding)) {
@@ -38,8 +25,27 @@
         $background = "rgba(0, 0, 0, 0.555)";
       }
 
-      //echo $border. " " . $padding . " " . $background;
-    }
+      //echo $border. " - " . $padding . " - " . $background;
+    };
+
+    function insert($info) {
+      $string = '';
+
+      global $informatie;
+
+      if($info == 'th') {
+          foreach($informatie as $th => $td){
+              $string .= "<th>$th</th>";
+          }
+      } elseif($info == 'td'){
+          foreach($informatie as $th => $td){
+              $string .= "<th>$td</th>";
+          }
+      }
+
+      echo($string);
+
+  }
 
     
 ?>
@@ -70,7 +76,7 @@
     
   td, th, tr{
     padding: <?=$padding?>;
-    border: <?=$border?> solid white;
+    border: solid white <?= $border;?>;
   }
 </style>
 </head>
@@ -86,14 +92,12 @@
     <table class="white-text">
         <thead>
           <tr>
-            <?php echo maakRij();?>
+            <?=insert('th')?>
           </tr>
         </thead>
         <tbody>
           <tr>
-          <?php foreach($informatie as $info => $antwoord):?>
-            <td class="grey-text lighten-5"><?=$antwoord?></td>
-            <?php endforeach;?>
+          <?=insert('td');?>
           </tr>
         </tbody>
       </table>
